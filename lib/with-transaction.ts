@@ -68,6 +68,9 @@ export class TransactionFor<T = any> {
         const entity: any = dependency!.metadata.target;
         argument = manager.getRepository(entity);
       } else {
+        if (!dependency) {
+          dependency = this.moduleRef.get(param, { strict: false });
+        }
         // The dependency is not a repository, use it directly.
         argument = dependency!;
       }
